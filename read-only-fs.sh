@@ -11,6 +11,25 @@ if [ $(id -u) -ne 0 ]; then
 	exit 1
 fi
 
+# Check if readonlyfs is already installed, exit if it is
+RUNFLAG=/opt/readonlyfs.host
+if [ -f RUNFLAG ]; then
+    echo "Already in readonly state."
+    exit 0
+fi
+
+NETWORKFLAG=/opt/networksetup.host
+# If setup is not ready, then ignore this script
+if [ ! -f NETWORKFLAG ]; then 
+    echo "Network not setup yet.. will wait..."
+    exit 0
+fi
+
+# If it has gotten to this point, then gateway is ready for installation
+# Add a flag to notify system if the system is already in read only
+# echo "Create flag to notify system that it is already read only..."
+touch RUNFLAG
+
 # FEATURE PROMPTS ----------------------------------------------------------
 
 SYS_TYPES=(Pi\ 3\ /\ Pi\ Zero\ W All\ other\ models)
