@@ -1,7 +1,9 @@
-# Raspberry-Pi-Installer-Scripts
+# Raspberry-Pi Read Only FS
 
-Some scripts for helping install Adafruit HATs, bonnets, add-on's, & friends!
+Modification of this single script to make it non-interactive.
 
-Based heavily on get.pimoroni.com scripts!
+## Use Case
 
-  * Install i2s amplifier with: curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash
+To run on boot at rc.local for first boot setup.
+
+Will write a file to the card before making it read only. So upon boot, if the file exists, the script will then exit.
